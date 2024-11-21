@@ -8,9 +8,9 @@ import { useShoppingCart } from "use-shopping-cart"; // Ensure this is correctly
 
 const links = [
   { name: "Home", href: "/" },
-  { name: "Spices", href: "/Spices" },
-  { name: "Dryfruits", href: "/Dryfruits" },
-  { name: "Seeds", href: "/Seeds" },
+  { name: "Products", href: "/Spices" },
+  // { name: "Dryfruits", href: "/Dryfruits" },
+  // { name: "Seeds", href: "/Seeds" },
 ];
 
 export default function Navbar() { // Ensure the component name matches the file

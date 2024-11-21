@@ -2,7 +2,7 @@ import Link from "next/link";
 import { simplifiedProduct } from "../interface";
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
-
+import styles from "../card-borders.module.css"
 async function getData(category: string) {
   try {
     const query = `*[_type == "product" && Categories->name == ${category}] {
@@ -45,6 +45,7 @@ export default async function CategoryPage({
 
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {data.map((product) => (
+                        <div key={product._id} className={`${styles.card} group relative`}>
             <div key={product._id} className="group relative">
               <div className="aspect-square w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80">
                 {product.imageUrl ? (
@@ -76,6 +77,7 @@ export default async function CategoryPage({
                 <p className="text-sm font-medium text-gray-900">
                   RP{product.basePrice}
                 </p>
+              </div>
               </div>
             </div>
           ))}

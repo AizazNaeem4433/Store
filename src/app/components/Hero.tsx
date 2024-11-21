@@ -1,10 +1,9 @@
 import Image from "next/image";
 import { client, urlFor } from "@/sanity/lib/client";
 import Link from "next/link";
-
-// Define the type for the fetched data
+import productStyle from "../product-button.module.css";
 interface HeroImageData {
-  Image1: string ;
+  Image1: string;
   Image2: string;
 }
 
@@ -15,7 +14,7 @@ async function getData(): Promise<HeroImageData | null> {
   }`;
 
   const data = await client.fetch(query);
-  return data[0] || null; // Return the first item in the array or null if no data
+  return data[0] || null;
 }
 
 export default async function Hero() {
@@ -69,14 +68,16 @@ export default async function Hero() {
       </div>
 
       <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
-        <div className="flex h-12 w-64 divide-x overflow-hidden rounded-lg border">
-          <Link
-            href="/Spices"
-            className="flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
-          >
-            Spices
-          </Link>
-          <Link
+        {/* <div className="flex h-12 w-64 divide-x overflow-hidden rounded-lg border"> */}
+          <div className={`${productStyle.button}`}>
+            <Link
+              href="/Spices"
+              className="flex w-full font-extrabold items-center justify-center text-gray-200 transition duration-100 hover:text-white active:text-white"
+            >
+              Products
+            </Link>
+          </div>
+          {/* <Link
             href="/Dryfruits"
             className="flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
           >
@@ -87,9 +88,9 @@ export default async function Hero() {
             className="flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
           >
             Seeds
-          </Link>
+          </Link> */}
         </div>
-      </div>
+      {/* </div> */}
     </section>
   );
 }
