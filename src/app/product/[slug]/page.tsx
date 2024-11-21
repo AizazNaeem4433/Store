@@ -5,7 +5,7 @@ import CheckoutNow from "@/app/components/CheckoutNow";
 import { fullProduct, WeightOption } from "@/app/interface"; // Import the types
 import { client, urlFor } from "@/sanity/lib/client";
 import { Truck } from "lucide-react";
-import styles from "@/app/loader.module.css"
+import styles from "@/app/loader.module.css";
 import Image from "next/image";
 
 async function fetchData(slug: string) {
@@ -22,7 +22,9 @@ async function fetchData(slug: string) {
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
   const [data, setData] = useState<fullProduct | null>(null);
-  const [selectedWeight, setSelectedWeight] = useState<WeightOption | null>(null);
+  const [selectedWeight, setSelectedWeight] = useState<WeightOption | null>(
+    null
+  );
 
   useEffect(() => {
     async function loadData() {
@@ -35,18 +37,17 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
     loadData();
   }, [params.slug]);
 
-  // Show loader if data is not loaded
   if (!data) {
     return (
-        <div className="flex items-center justify-center p-10">
-      <div className={styles.loader}>
-        <div className={styles.loader__bar}></div>
-        <div className={styles.loader__bar}></div>
-        <div className={styles.loader__bar}></div>
-        <div className={styles.loader__bar}></div>
-        <div className={styles.loader__bar}></div>
-        <div className={styles.loader__ball}></div>
-      </div>
+      <div className="flex items-center justify-center p-10">
+        <div className={styles.loader}>
+          <div className={styles.loader__bar}></div>
+          <div className={styles.loader__bar}></div>
+          <div className={styles.loader__bar}></div>
+          <div className={styles.loader__bar}></div>
+          <div className={styles.loader__bar}></div>
+          <div className={styles.loader__ball}></div>
+        </div>
       </div>
     );
   }
@@ -62,8 +63,10 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         <div className="grid gap-8 md:grid-cols-2">
           {data.images && (
             <Image
-              src={data.images[0]} 
+              src={data.images[0]}
               alt={data.name}
+              width={1000}
+              height={1000}
               className="w-full h-auto object-cover"
             />
           )}
@@ -104,7 +107,9 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                   Rs {calculatedPrice.toFixed(2)}
                 </span>
               </div>
-              <span className="text-sm text-gray-500">Incl. VAT plus shipping</span>
+              <span className="text-sm text-gray-500">
+                Incl. VAT plus shipping
+              </span>
             </div>
             <div className="mb-6 flex items-center gap-2 text-gray-500">
               <Truck className="w-6 h-6" />
