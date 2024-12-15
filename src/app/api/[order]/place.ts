@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { client } from '@/sanity/lib/client'; // Adjust the import based on your project structure
 
 interface OrderRequestBody {
-  cartItems: any[]; // Adjust the type based on your cart item structure
+  cartItems: [string, number]; // Adjust the type based on your cart item structure
   totalAmount: number;
   paymentMethod: string;
   customerName: string;
