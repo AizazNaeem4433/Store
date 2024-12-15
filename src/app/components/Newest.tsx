@@ -22,7 +22,7 @@ async function getData() {
 
 // yahan pr price Calculate ho rhi based on weight
 function calculatePrice(basePrice: number, weight: string) {
-  const multiplier = weight === "50g" ? 0.05 : weight === "100g" ? 0.1 : 1;
+  const multiplier = weight === "1" ? 1 : weight === "100g" ? 0.1 : 1;
   const finalPrice = basePrice * multiplier;
   return `RP ${finalPrice.toLocaleString("en-US", {
     minimumFractionDigits: 0,

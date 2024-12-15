@@ -4,19 +4,16 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ShoppingBag } from "lucide-react";
-import { useShoppingCart } from "use-shopping-cart"; // Ensure this is correctly imported
+import { useShoppingCart } from "use-shopping-cart";
+import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs";
 
 const links = [
   { name: "Home", href: "/" },
   { name: "Products", href: "/Spices" },
-  // { name: "Dryfruits", href: "/Dryfruits" },
-  // { name: "Seeds", href: "/Seeds" },
 ];
 
-export default function Navbar() { // Ensure the component name matches the file
+export default function Navbar() {
   const pathname = usePathname();
-  
-  // Destructure handleCartClick from useShoppingCart
   const { handleCartClick } = useShoppingCart();
 
   return (
@@ -37,7 +34,7 @@ export default function Navbar() { // Ensure the component name matches the file
                   href={link.href}
                 >
                   {link.name}
-                </Link>
+                </Link> 
               ) : (
                 <Link
                   href={link.href}
@@ -50,10 +47,10 @@ export default function Navbar() { // Ensure the component name matches the file
           ))}
         </nav>
 
-        <div className="flex divide-x border-r sm:border-l">
+        <div className="flex items-center divide-x border-r sm:border-l">
           <Button
             variant={"outline"}
-            onClick={handleCartClick} // Ensure handleCartClick is called correctly
+            onClick={handleCartClick}
             className="flex flex-col gap-y-1.5 h-12 w-12 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-none"
           >
             <ShoppingBag />
@@ -61,6 +58,38 @@ export default function Navbar() { // Ensure the component name matches the file
               Cart
             </span>
           </Button>
+
+          <div className="flex items-center pl-4 sm:pl-6">
+            <SignedOut>
+              <SignInButton>
+                <button
+                  className="h-10 w-10 flex justify-center items-center rounded-full text-gray-700 hover:text-primary"
+                  title="Login/Sign Up"
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M8 7C9.65685 7 11 5.65685 11 4C11 2.34315 9.65685 1 8 1C6.34315 1 5 2.34315 5 4C5 5.65685 6.34315 7 8 7Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M14 12C14 10.3431 12.6569 9 11 9H5C3.34315 9 2 10.3431 2 12V15H14V12Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </button>
+              </SignInButton>
+            </SignedOut>
+
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          </div>
         </div>
       </div>
     </header>

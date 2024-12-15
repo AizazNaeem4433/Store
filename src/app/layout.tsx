@@ -4,6 +4,10 @@ import "./globals.css";
 import CartProvider from "./components/Provider";
 import Navbar from "./components/Nevbar";
 import ShoppingCartModal from "./components/ShoppingCartModal";
+import {
+  ClerkProvider,
+
+} from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,11 +24,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <CartProvider>
-          <Navbar />
-          <ShoppingCartModal />
-          {children}
-        </CartProvider>
+        <ClerkProvider>
+          <html lang="en">
+            <body>
+            <CartProvider>
+              <Navbar />
+              <ShoppingCartModal />
+              {children}
+            </CartProvider>
+            </body>
+          </html>
+        </ClerkProvider>
       </body>
     </html>
   );
